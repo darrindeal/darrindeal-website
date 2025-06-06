@@ -39,7 +39,7 @@ function MailIcon(props) {
 export const metadata = {
   title: 'About',
   description:
-    'I\'m Spencer Sharp. I live in New York City, where I design the future.',
+    'I&apos;m Spencer Sharp. I live in New York City, where I design the future.',
 }
 
 export default function About() {
@@ -61,18 +61,18 @@ export default function About() {
             My name is Darrin Deal.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <p>I'm a builder at heart—whether that's spinning up a fresh Laravel app, sketching 
+            <p>I&apos;m a builder at heart—whether that&apos;s spinning up a fresh Laravel app, sketching 
               out a React Native screen on an iPad, or fine-tuning a Swift side project at 
               midnight because inspiration struck. I run <a href="https://wellspring.marketing">Wellspring</a>, 
-              my small-business marketing business where we treat every project like it's 
+              my small-business marketing business where we treat every project like it&apos;s 
               our own brand on the line. I also have my personal app 
               experiments that keep my dev muscles up and my curiosity peaked.</p>
 
-            <p>Home base is Indianapolis, where I'm a happily married, a father, chief backyard BBQ tinker-er, and full-time wrangler of two dogs and one chill cat. Those BBQ on the weekends remind me why I love building things in the first place: craft, patience, and a payoff you can share.</p>
+            <p>Home base is Indianapolis, where I&apos;m a happily married, a father, chief backyard BBQ tinker-er, and full-time wrangler of two dogs and one chill cat. Those BBQ on the weekends remind me why I love building things in the first place: craft, patience, and a payoff you can share.</p>
             
-            <p>On the tech front, PHP, Laravel, Livewire, React Native, and Swift are my go-to. I'm forever chasing that sweet spot where clean code, intuitive UX, and solid marketing collide to create something users actually rave about and can use.</p>
+            <p>On the tech front, PHP, Laravel, Livewire, React Native, and Swift are my go-to. I&apos;m forever chasing that sweet spot where clean code, intuitive UX, and solid marketing collide to create something users actually rave about and can use.</p>
 
-            <p>If you ar into dev stories, hard-won marketing lessons, the occasional brisket tip, or the thoughtful husband/dad comment, I'd love to stay in touch. Join the newsletter and let's keep building cool stuff together.</p>
+            <p>If you ar into dev stories, hard-won marketing lessons, the occasional brisket tip, or the thoughtful husband/dad comment, I&apos;d love to stay in touch. Join the newsletter and let&apos;s keep building cool stuff together.</p>
           </div>
         </div>
         <div className="lg:pl-20">
