@@ -1,0 +1,98 @@
+#!/usr/bin/env php
+<?php
+$args = $argv;
+array_shift($args);
+
+//-----------------------------------
+function makeArticle($args)
+{
+    $base = $args[0] ?? '';
+    $name = $args[1] ?? '';
+
+    $dir = $base . '/' . $name;
+
+    if($dir){
+        $dir = './src/app/' . $dir;
+        if(!is_dir($dir)){
+            if(mkdir($dir)){
+                $filename = $dir . '/page.mdx';
+                $stub = <<<'mdx'
+                import { ArticleLayout } from '@/components/ArticleLayout'
+
+                export default function ArticlePage({ children }) {
+                return <ArticleLayout article={article}>{children}</ArticleLayout>
+                }
+
+                export const article = {
+                    author: 'Darrin Deal',
+                    date: 'xxxx-xx-xx',
+                    title: 'Stub',
+                    description:
+                        'stub',
+                    tags: []
+                }
+
+                export const metadata = {
+                    title: article.title
+                    description: article.description,
+                    alternates: {
+                        canonical: 'https://darrindeal.com/on-laravel/getting-started-with-laravel',
+                    }
+                }
+                mdx;
+
+                $file = fopen($filename, "w");
+
+                if ($file) {
+                    fwrite($file, $stub);
+                    fclose($file);       
+                }
+            }
+        }
+    }
+}
+
+function send($args)
+{
+    $output=null;
+    $retval=null;
+    $message = $args[0] ?? 'WIP';
+
+    exec("git add .", $output, $retval);
+
+    foreach($output as $line){
+        echo $line . PHP_EOL;
+    }
+
+    exec("git commit -m '$message'", $output, $retval);
+
+    foreach($output as $line){
+        echo $line . PHP_EOL;
+    }
+
+    exec("git push origin $(git branch --show-current)", $output, $retval);
+
+    foreach($output as $line){
+        echo $line . PHP_EOL;
+    }
+}
+//-----------------------------------
+
+$command = $args[0] ?? '';
+
+if(empty($command)){
+    echo 'No command';
+}
+
+$command = explode(':', $command);
+
+foreach ($command as $index => $word) {
+    $command[$index] = $index == 0 ? $word : ucfirst(strtolower($word));
+}
+
+$command = implode($command);
+
+if(function_exists($command)){
+    array_shift($args);
+    $command($args);
+}
