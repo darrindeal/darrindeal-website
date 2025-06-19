@@ -18,3 +18,10 @@ export async function getAllArticles(excludedTags = [], path = 'articles') {
 
   return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
 }
+
+export function mergeSortAndGetLatest(...articleGroups){
+  let allArticles = [];
+  articleGroups.map(group => allArticles.push(...group))
+
+  return allArticles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
+}

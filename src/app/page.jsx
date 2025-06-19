@@ -23,7 +23,7 @@ import image2 from '@/images/photos/image-2.jpeg'
 import image3 from '@/images/photos/image-3.jpeg'
 import image4 from '@/images/photos/image-4.jpeg'
 import image5 from '@/images/photos/image-5.jpeg'
-import { getAllArticles, getArticlesWithTag } from '@/lib/articles'
+import { getAllArticles, mergeSortAndGetLatest } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
 function MailIcon(props) {
@@ -261,8 +261,8 @@ function Photos() {
 export default async function Home() {
   let otherArticles = (await getAllArticles())
   let onLaravelArticles = (await getAllArticles([], 'on-laravel'))
-  let articles = [...otherArticles, ...onLaravelArticles]
 
+  let articles = (mergeSortAndGetLatest(otherArticles, onLaravelArticles)).slice(0, 4);
   return (
     <>
       <Container className="mt-9">
