@@ -14,7 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/avatar.jpg'
+import profileImage from '@/images/profile.jpeg'
 
 function CloseIcon(props) {
   return (
@@ -113,9 +113,10 @@ function MobileNavigation(props) {
         </div>
         <nav className="mt-6">
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-            <MobileNavItem href="/about">About</MobileNavItem>
             <MobileNavItem href="/articles">Articles</MobileNavItem>
+            <MobileNavItem href="/on-laravel">On Laravel</MobileNavItem>
             <MobileNavItem href="/projects">Projects</MobileNavItem>
+            <MobileNavItem href="/about">About</MobileNavItem>
           </ul>
         </nav>
       </PopoverPanel>
@@ -131,7 +132,7 @@ function NavItem({ href, children }) {
       <Link
         href={href}
         className={clsx(
-          'relative block px-3 py-2 transition',
+          'relative block px-3 py-2 transition font-medium',
           isActive
             ? 'text-orange-500 dark:text-orange-400'
             : 'hover:text-orange-500 dark:hover:text-orange-400',
@@ -149,10 +150,11 @@ function NavItem({ href, children }) {
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/about">About</NavItem>
+      <ul className="flex justify-center px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 ">
         <NavItem href="/articles">Articles</NavItem>
+        <NavItem href="/on-laravel">On Laravel</NavItem>
         <NavItem href="/projects">Projects</NavItem>
+        <NavItem href="/about">About</NavItem>
       </ul>
     </nav>
   )
@@ -207,7 +209,7 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={avatarImage}
+        src={profileImage}
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
@@ -329,10 +331,6 @@ export function Header() {
 
   return (
     <>
-      <div class="bg-orange-500/10  text-center py-2 font-bold" >
-        THIS SITE IS UNDER CONSTRUCTION
-
-      </div>
       <header
         className="pointer-events-none relative z-50 flex flex-none flex-col"
         style={{
@@ -352,27 +350,6 @@ export function Header() {
                 position: 'var(--header-position)',
               }}
             >
-              <div
-                className="top-(--avatar-top,--spacing(3)) w-full"
-                style={{
-                  position: 'var(--header-inner-position)',
-                }}
-              >
-                <div className="relative">
-                  <AvatarContainer
-                    className="absolute top-3 left-0 origin-left transition-opacity"
-                    style={{
-                      opacity: 'var(--avatar-border-opacity, 0)',
-                      transform: 'var(--avatar-border-transform)',
-                    }}
-                  />
-                  <Avatar
-                    large
-                    className="block h-16 w-16 origin-left"
-                    style={{ transform: 'var(--avatar-image-transform)' }}
-                  />
-                </div>
-              </div>
             </Container>
           </>
         )}
@@ -389,24 +366,17 @@ export function Header() {
               position: 'var(--header-inner-position)',
             }}
           >
-            <div className="relative flex gap-4">
-              <div className="flex flex-1">
-                {!isHomePage && (
-                  <AvatarContainer>
-                    <Avatar />
-                  </AvatarContainer>
-                )}
-              </div>
-              <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
-              </div>
-              <div className="flex justify-end md:flex-1">
+            <div className="my-4 flex justify-between gap-4 backdrop-blur-sm p-2 rounded-full">
+              <Avatar />
+              <DesktopNavigation className="flex-1 pointer-events-auto hidden md:block flex items-center" />
+              <div className="flex gap-4">
                 <div className="pointer-events-auto">
                   <ThemeToggle />
                 </div>
+                <MobileNavigation className="pointer-events-auto md:hidden" />
               </div>
             </div>
+            
           </Container>
         </div>
       </header>

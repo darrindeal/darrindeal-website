@@ -1,6 +1,9 @@
+
 import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
+
+//import Masonry from "react-masonry-css";
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -15,12 +18,12 @@ import logoAirbnb from '@/images/logos/airbnb.svg'
 import logoFacebook from '@/images/logos/facebook.svg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
 import logoStarbucks from '@/images/logos/starbucks.svg'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
-import { getAllArticles } from '@/lib/articles'
+import image1 from '@/images/photos/image-1.jpeg'
+import image2 from '@/images/photos/image-2.jpeg'
+import image3 from '@/images/photos/image-3.jpeg'
+import image4 from '@/images/photos/image-4.jpeg'
+import image5 from '@/images/photos/image-5.jpeg'
+import { getAllArticles, getArticlesWithTag } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
 function MailIcon(props) {
@@ -84,8 +87,8 @@ function ArrowDownIcon(props) {
 
 function Article({ article }) {
   return (
-    <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
+    <Card className="md:w-3/4 m-0 md:odd:ml-auto">
+      <Card.Title href={`${article.slug}`}>
         {article.title}
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
@@ -109,7 +112,7 @@ function Newsletter() {
   return (
     <form
       action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+      className="rounded-2xl bg-zinc-100 border border-zinc-100 p-6 dark:border-zinc-700/40 dark:bg-zinc-800"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <MailIcon className="h-6 w-6 flex-none" />
@@ -254,15 +257,18 @@ function Photos() {
   )
 }
 
+
 export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
+  let otherArticles = (await getAllArticles())
+  let onLaravelArticles = (await getAllArticles([], 'on-laravel'))
+  let articles = [...otherArticles, ...onLaravelArticles]
 
   return (
     <>
       <Container className="mt-9">
-        <div className="max-w-xl">
+        <div className="max-w-2xl">
           <h1 className="text-5xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Husband, Father, Software Developer, And Entrepreneur
+            Christian, Husband, Father, Developer, And Entrepreneur
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             Hello there! My name is Darrin, a husband, father, software developer, And 
@@ -270,37 +276,50 @@ export default async function Home() {
             life better for everyday people.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="https://www.x.com/darrindeal/" aria-label="Follow on X" icon={XIcon} />
+            <SocialLink 
+              href="https://www.x.com/darrindeal/" 
+              aria-label="Follow on X" 
+              icon={XIcon} 
+              target="_blank"
+            />
             <SocialLink
               href="https://www.instagram.com/darrindeal/"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
+              target="_blank"
             />
             <SocialLink
               href="https://www.github.com/darrindeal/"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
+              target="_blank"
             />
             <SocialLink
               href="https://www.linkedin.com/in/darrindeal/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
+              target="_blank"
             />
           </div>
         </div>
       </Container>
       <Photos />
       <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none">
+          <div className="max-w-xl">
+            <h2 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">Latest Writings</h2>
+            <p className=" text-base text-zinc-600 dark:text-zinc-400">
+              Read my latest articles on faith, family, business, and Laravel.
+            </p>
+          </div>
           <div className="flex flex-col gap-16">
             {articles.map((article) => (
               <Article key={article.slug} article={article} />
             ))}
           </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
+          {/*<div className="w-full md:w-1/2 mx-auto">
             <Newsletter />
-            {/* <Resume /> */}
-          </div>
+          </div>*/}
         </div>
       </Container>
     </>

@@ -10,6 +10,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   outputFileTracingIncludes: {
       '/articles/*': ['./src/app/articles/**/*.mdx'],
+      '/on-laravel/*': ['./src/app/on-laravel/**/*.mdx'],
     },
   
 }

@@ -2,20 +2,40 @@ import Image from 'next/image'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAnimaginary from '@/images/logos/animaginary.svg'
-import logoCosmos from '@/images/logos/cosmos.svg'
-import logoHelioStream from '@/images/logos/helio-stream.svg'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import logoGarageNotes from '@/images/logos/garagenotes.png'
+import logoiHeartUs from '@/images/logos/iheartus.jpeg'
+import logoPitlog from '@/images/logos/pitlog-logo.svg'
+import logoWellspring from '@/images/logos/wellspring.png'
 
 const projects = [
-  /*{
-    name: 'Planetaria',
+  {
+    name: 'Wellspring',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
-  },*/
+      'Empowering small businesses through cost-effective marketing.',
+    link: { href: 'https://wellspring.marketing', label: 'wellspring.marketing' },
+    logo: logoWellspring,
+  },
+  {
+    name: 'iHeartUs',
+    description:
+      'The app that strengthens the connection with your partner.',
+    link: { href: 'https://iheartus.com', label: 'iheartus.com' },
+    logo: logoiHeartUs,
+  },
+  {
+    name: 'PitLog',
+    description:
+      'Log your BBQ cooks and keep your recipies all in one app.',
+    link: { href: '#', label: 'Link coming soon' },
+    logo: logoPitlog,
+  },
+  {
+    name: 'GarageNotes',
+    description:
+      'An app to track of your vehicles information and maintiance.',
+    link: { href: '#', label: 'Link coming soon' },
+    logo: logoGarageNotes,
+  }
 ]
 
 function LinkIcon(props) {
@@ -31,18 +51,18 @@ function LinkIcon(props) {
 
 export const metadata = {
   title: 'Projects',
-  description: 'Making things that make life better for everyday people.',
+  description: 'Making things that make life better for others.',
 }
 
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Making things that make life better for everyday people."
-      intro="This is a collection of my projects, ranging from open-source software to personal ventures. Each project reflects my passion for building tools and technologies that empower individuals and communities."
+      title="Making things that make life better for others."
+      intro="This is a collection of projects, ranging from open-source software to personal ventures. Each project reflects my passion for building tools and technologies that empower individuals and communities accomplish their mission."
     >
       <ul
         role="list"
-        className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 gap-x-16 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
       >
         {projects.map((project) => (
           <Card as="li" key={project.name}>
@@ -50,12 +70,12 @@ export default function Projects() {
               <Image
                 src={project.logo}
                 alt=""
-                className="h-8 w-8"
+                className="h-8 w-8 rounded-full"
                 unoptimized
               />
             </div>
             <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-              <Card.Link href={project.link.href}>{project.name}</Card.Link>
+              <Card.Link target="_blank" href={project.link.href}>{project.name}</Card.Link>
             </h2>
             <Card.Description>{project.description}</Card.Description>
             <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-orange-500 dark:text-zinc-200">
